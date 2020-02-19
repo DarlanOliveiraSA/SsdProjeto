@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package view;
 
 /**
@@ -12,14 +11,22 @@ package view;
  */
 public class ViewConfig extends javax.swing.JDialog {
 
+    ViewPDV viewPDV = new ViewPDV();
+
     /**
      * Creates new form ViewConfig
+     * @param parent
+     * @param modal
      */
     public ViewConfig(java.awt.Frame parent, boolean modal) {
-        
+
         super(parent, modal);
         setLocationRelativeTo(null);
         initComponents();
+    }
+
+    public ViewConfig(ViewPDV pViewPDV) {
+        this.viewPDV = pViewPDV;
     }
 
     /**
@@ -64,7 +71,7 @@ public class ViewConfig extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        ViewPDV viewPDV = new ViewPDV();
+
         viewPDV.escolherLogo();
         viewPDV.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
