@@ -1,10 +1,9 @@
-/*//GEN-FIRST:event_jbRetrocederActionPerformed
- * To change this license header, choose License Headers in Project Properties.//GEN-LAST:event_jbRetrocederActionPerformed
+/*
+ * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package view;
-
 
 import java.awt.Color;
 import java.util.GregorianCalendar;
@@ -37,7 +36,7 @@ public class ATestesAleatorios extends javax.swing.JFrame {
         //5 = dia
         //11 = hora
         //12 = minuto
-         //datas.set(2020, 01 - 1, 15);
+        //datas.set(2020, 01 - 1, 15);
         int diaAtual = datas.get(datas.DAY_OF_MONTH);
         int mesAtual = datas.get(datas.MONTH);
         mesAtual = mesAtual + 1;
@@ -124,7 +123,7 @@ public class ATestesAleatorios extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
 
 
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jpTopoDataInicial = new javax.swing.JPanel();
@@ -240,11 +239,11 @@ public class ATestesAleatorios extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>                        
+    }// </editor-fold>//GEN-END:initComponents
 
-    private void jbRetrocederActionPerformed(java.awt.event.ActionEvent evt) {                                             
+    private void jbRetrocederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRetrocederActionPerformed
         // TODO add your handling code here:
-    }                                            
+    }//GEN-LAST:event_jbRetrocederActionPerformed
 
     /**
      * @param args the command line arguments
@@ -283,7 +282,7 @@ public class ATestesAleatorios extends javax.swing.JFrame {
     }
 
 
-    // Variables declaration - do not modify                     
+    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -297,5 +296,5 @@ public class ATestesAleatorios extends javax.swing.JFrame {
     private javax.swing.JPanel jpCorpoCalendario;
     private javax.swing.JPanel jpTopoDataInicial;
     private javax.swing.JFormattedTextField jtfDataAtual;
-    // End of variables declaration                   
+    // End of variables declaration//GEN-END:variables
 }
