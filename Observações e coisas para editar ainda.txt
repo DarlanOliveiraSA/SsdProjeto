@@ -1,0 +1,5 @@
+Mudar a variável "Forma de pagamento" do ModelVendasProdutos para o ModelVendas.
+
+Corrigir o efeito responsivo da logo principal.
+
+Inserir a opção de adicionar um produto pelo código direto na tabela

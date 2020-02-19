@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Teste1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cd2c7756-d0c9-43b7-a811-1a590b5cc808">
+	<property name="ireport.zoom" value="1.6105100000000014"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#000000" fontName="Arial" fontSize="28"/>
+	<style name="Coluna" isBlankWhenNull="true" fontName="Arial" fontSize="13" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<style name="Detalhes" fontName="Arial" fontSize="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<style name="Row">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#CCFFCC"/>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[SELECT
+     tbl_cliente.`pk_id_cliente` AS tbl_cliente_pk_id_cliente,
+     tbl_cliente.`cli_nome` AS tbl_cliente_cli_nome,
+     tbl_cliente.`cli_endereco` AS tbl_cliente_cli_endereco,
+     tbl_cliente.`cli_bairro` AS tbl_cliente_cli_bairro,
+     tbl_cliente.`cli_cidade` AS tbl_cliente_cli_cidade,
+     tbl_cliente.`cli_uf` AS tbl_cliente_cli_uf,
+     tbl_cliente.`cli_cep` AS tbl_cliente_cli_cep,
+     tbl_cliente.`cli_telefone` AS tbl_cliente_cli_telefone,
+     tbl_cliente.`cli_num_casa` AS tbl_cliente_cli_num_casa,
+     tbl_cliente.`cli_telCod` AS tbl_cliente_cli_telCod,
+     tbl_produto.`pk_id_produto` AS tbl_produto_pk_id_produto,
+     tbl_produto.`pro_nome` AS tbl_produto_pro_nome,
+     tbl_produto.`pro_valor` AS tbl_produto_pro_valor,
+     tbl_produto.`pro_estoque` AS tbl_produto_pro_estoque,
+     tbl_vendas.`pk_id_vendas` AS tbl_vendas_pk_id_vendas,
+     tbl_vendas.`fk_cliente` AS tbl_vendas_fk_cliente,
+     tbl_vendas.`ven_data_venda` AS tbl_vendas_ven_data_venda,
+     tbl_vendas.`ven_valor_liquido` AS tbl_vendas_ven_valor_liquido,
+     tbl_vendas.`ven_valor_bruto` AS tbl_vendas_ven_valor_bruto,
+     tbl_vendas.`ven_desconto` AS tbl_vendas_ven_desconto,
+     tbl_vendas.`fk_forPag` AS tbl_vendas_fk_forPag,
+     tbl_vendas_produtos.`pk_id_venda_produtos` AS tbl_vendas_produtos_pk_id_venda_produtos,
+     tbl_vendas_produtos.`fk_produto` AS tbl_vendas_produtos_fk_produto,
+     tbl_vendas_produtos.`fk_vendas` AS tbl_vendas_produtos_fk_vendas,
+     tbl_vendas_produtos.`ven_pro_valor` AS tbl_vendas_produtos_ven_pro_valor,
+     tbl_vendas_produtos.`ven_pro_quantidade` AS tbl_vendas_produtos_ven_pro_quantidade,
+     tbl_cliente.`cli_PontoReferencia` AS tbl_cliente_cli_PontoReferencia
+FROM
+     `tbl_produto` tbl_produto INNER JOIN `tbl_vendas_produtos` tbl_vendas_produtos ON tbl_produto.`pk_id_produto` = tbl_vendas_produtos.`fk_produto`
+     INNER JOIN `tbl_vendas` tbl_vendas ON tbl_vendas_produtos.`fk_vendas` = tbl_vendas.`pk_id_vendas`
+     INNER JOIN `tbl_cliente` tbl_cliente ON tbl_vendas.`fk_cliente` = tbl_cliente.`pk_id_cliente`]]>
+	</queryString>
+	<field name="tbl_cliente_pk_id_cliente" class="java.math.BigInteger"/>
+	<field name="tbl_cliente_cli_nome" class="java.lang.String"/>
+	<field name="tbl_cliente_cli_endereco" class="java.lang.String"/>
+	<field name="tbl_cliente_cli_bairro" class="java.lang.String"/>
+	<field name="tbl_cliente_cli_cidade" class="java.lang.String"/>
+	<field name="tbl_cliente_cli_uf" class="java.lang.String"/>
+	<field name="tbl_cliente_cli_cep" class="java.lang.String"/>
+	<field name="tbl_cliente_cli_telefone" class="java.lang.String"/>
+	<field name="tbl_cliente_cli_num_casa" class="java.lang.String"/>
+	<field name="tbl_cliente_cli_telCod" class="java.lang.Integer"/>
+	<field name="tbl_produto_pk_id_produto" class="java.math.BigInteger"/>
+	<field name="tbl_produto_pro_nome" class="java.lang.String"/>
+	<field name="tbl_produto_pro_valor" class="java.lang.Double"/>
+	<field name="tbl_produto_pro_estoque" class="java.lang.Integer"/>
+	<field name="tbl_vendas_pk_id_vendas" class="java.math.BigInteger"/>
+	<field name="tbl_vendas_fk_cliente" class="java.math.BigInteger"/>
+	<field name="tbl_vendas_ven_data_venda" class="java.sql.Date"/>
+	<field name="tbl_vendas_ven_valor_liquido" class="java.lang.Double"/>
+	<field name="tbl_vendas_ven_valor_bruto" class="java.lang.Double"/>
+	<field name="tbl_vendas_ven_desconto" class="java.lang.Double"/>
+	<field name="tbl_vendas_fk_forPag" class="java.lang.Integer"/>
+	<field name="tbl_vendas_produtos_pk_id_venda_produtos" class="java.math.BigInteger"/>
+	<field name="tbl_vendas_produtos_fk_produto" class="java.math.BigInteger"/>
+	<field name="tbl_vendas_produtos_fk_vendas" class="java.math.BigInteger"/>
+	<field name="tbl_vendas_produtos_ven_pro_valor" class="java.lang.Double"/>
+	<field name="tbl_vendas_produtos_ven_pro_quantidade" class="java.lang.Integer"/>
+	<field name="tbl_cliente_cli_PontoReferencia" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="128" splitType="Stretch">
+			<image scaleImage="RetainShape">
+				<reportElement mode="Transparent" x="2" y="0" width="371" height="117" uuid="4a5f22e0-2fad-46fa-ac50-6b7a774b8b8c"/>
+				<imageExpression><![CDATA["C:\\SSDprojeto\\src\\imagens\\logo da empresa.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Coluna" x="374" y="15" width="181" height="32" uuid="028bec10-21a8-4a81-99ba-5d81bd741c4a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Número da venda:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="374" y="47" width="181" height="70" uuid="6c2f83b4-ed73-4b71-8013-7b23c66d0781"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="50" isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_vendas_pk_id_vendas}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="455" y="0" width="100" height="15" uuid="6c56bbb9-4511-4af2-a290-0eaa5149b552"/>
+				<textFieldExpression><![CDATA[$F{tbl_vendas_ven_data_venda}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="137" splitType="Stretch">
+			<staticText>
+				<reportElement style="Coluna" x="0" y="1" width="53" height="20" uuid="ec4885ee-6461-4ff7-b6dc-41b0a4ce16b6"/>
+				<textElement>
+					<font isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Cliente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Coluna" x="0" y="20" width="66" height="20" uuid="7e8e528c-14d8-45f3-8c50-9a653e88bd9b"/>
+				<textElement>
+					<font isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Endereço:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Coluna" x="250" y="41" width="53" height="20" uuid="7bf2009a-99c0-47e8-ae42-ff2bf9637e4f"/>
+				<textElement>
+					<font isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Cidade:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Coluna" x="2" y="40" width="51" height="20" uuid="4a6c2e55-462a-455b-a7a8-956f6a467f15"/>
+				<textElement>
+					<font isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Bairro:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Coluna" x="297" y="0" width="64" height="20" uuid="b3c7cd93-fe11-4c4a-b3d2-7547b9354360"/>
+				<textElement>
+					<font isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Telefone:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Coluna" x="459" y="41" width="26" height="20" uuid="a3596d81-41ab-4bc2-a769-84774a1911d3"/>
+				<textElement>
+					<font isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[UF:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="377" y="62" width="33" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="42792994-d92d-485d-8b4c-c340ea02ed94"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="Arial" size="13" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[CEP:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="53" y="0" width="244" height="20" forecolor="#0000FF" uuid="339409da-9a2b-478b-98a5-4437a4a6bd8c"/>
+				<textElement verticalAlignment="Top">
+					<font size="12" isBold="true" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_cliente_cli_nome}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="66" y="20" width="173" height="20" forecolor="#0000FF" uuid="125d8e5f-ab35-42cf-92ca-e868484b2f64"/>
+				<textElement verticalAlignment="Top">
+					<font size="12" isBold="true" isUnderline="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_cliente_cli_endereco}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="361" y="0" width="35" height="20" forecolor="#0000FF" uuid="ae72a2ac-406d-4c2e-8e76-f56a1ab8228e"/>
+				<textElement verticalAlignment="Top">
+					<font size="12" isBold="true" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["("+$F{tbl_cliente_cli_telCod}+")"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="396" y="0" width="100" height="20" forecolor="#0000FF" uuid="0d0c96ab-e1db-465c-be38-fbb2e0e4c141"/>
+				<textElement verticalAlignment="Top">
+					<font size="12" isBold="true" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_cliente_cli_telefone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="53" y="40" width="142" height="20" forecolor="#0000FF" uuid="f4ac5ce1-82cd-414a-abb3-f23cc25b3792"/>
+				<textElement verticalAlignment="Top">
+					<font size="12" isBold="true" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_cliente_cli_bairro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="303" y="41" width="127" height="20" forecolor="#0000FF" uuid="4548a025-3cb1-43c5-9eeb-3a5b4f1e4698"/>
+				<textElement verticalAlignment="Top">
+					<font size="12" isBold="true" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_cliente_cli_cidade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="485" y="41" width="68" height="20" forecolor="#0000FF" uuid="f7bbea03-eb0f-4c0e-b9a7-2854d1b1f1b7"/>
+				<textElement verticalAlignment="Top">
+					<font size="12" isBold="true" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_cliente_cli_uf}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="410" y="61" width="143" height="20" forecolor="#0000FF" uuid="adc79a84-04fb-404a-9802-932b3667ee66"/>
+				<textElement verticalAlignment="Top">
+					<font size="12" isBold="true" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_cliente_cli_cep}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="2" y="82" width="553" height="23" backcolor="#FFFFFF" uuid="3d784c63-3777-4ce9-ad0a-0215321f4357"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="Coluna" x="0" y="117" width="43" height="20" uuid="20ba68ec-cb74-421f-96b0-435bed229272"/>
+				<textElement>
+					<font isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Cód.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Coluna" x="43" y="117" width="342" height="20" uuid="b0b62359-9f03-4bc1-a234-c8c9292a264b"/>
+				<textElement>
+					<font isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Nome do Produto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Coluna" x="385" y="117" width="49" height="20" uuid="70666ad7-c262-4f52-9ec5-bccc537f8077"/>
+				<textElement>
+					<font isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[QT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Coluna" x="434" y="117" width="56" height="20" uuid="af30cdba-1ecc-4458-af67-6818e9cacd59"/>
+				<textElement>
+					<font isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[V.Unit.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Coluna" x="490" y="117" width="65" height="20" uuid="fa5dc8f8-de3e-44ee-8a0b-140afb67f37b"/>
+				<textElement>
+					<font isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[V.Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Coluna" x="250" y="21" width="26" height="20" uuid="b1bb357e-5813-4cd8-8780-edf07f48d5e9"/>
+				<textElement>
+					<font isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Nrº:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="276" y="21" width="97" height="20" forecolor="#0000FF" uuid="0da367cd-aa2d-49fe-b4c0-d4501b28af4f"/>
+				<textElement verticalAlignment="Top">
+					<font size="12" isBold="true" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_cliente_cli_num_casa}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Coluna" x="2" y="81" width="553" height="23" uuid="0532bb7e-f880-4ea1-8f4e-972b68e521ba"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCRIÇÃO DO PEDIDO]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="130" y="61" width="113" height="20" forecolor="#0000FF" uuid="cfc27435-b692-4493-8b5f-19fad338c168"/>
+				<textElement verticalAlignment="Top">
+					<font size="12" isBold="true" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_cliente_cli_PontoReferencia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Coluna" x="2" y="61" width="128" height="20" uuid="082035a7-4d99-4c31-b653-05fefdd81d5a"/>
+				<textElement>
+					<font isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Ponto de referência:]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="2" width="555" height="15" uuid="67add030-448e-4bb2-bd9f-d98ce060a0d6"/>
+			</frame>
+			<textField>
+				<reportElement x="0" y="0" width="43" height="17" uuid="40349def-68e6-4f5d-8b2d-54f42cd0489c"/>
+				<textFieldExpression><![CDATA[$F{tbl_produto_pk_id_produto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="43" y="0" width="342" height="17" uuid="de989248-3d02-44ee-935b-58b10226501c"/>
+				<textFieldExpression><![CDATA[$F{tbl_produto_pro_nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="385" y="0" width="49" height="17" uuid="2cc86c81-c90b-4bbb-9267-968c4321adca"/>
+				<textFieldExpression><![CDATA[$F{tbl_vendas_produtos_ven_pro_quantidade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="434" y="0" width="56" height="17" uuid="20ac427e-5cb1-4f94-bfa2-bf1f7c895408"/>
+				<textFieldExpression><![CDATA[$F{tbl_vendas_produtos_ven_pro_valor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="490" y="0" width="65" height="17" uuid="4aa38f43-18e4-4fc3-bdf1-a5039ae17a8f"/>
+				<textFieldExpression><![CDATA[$F{tbl_vendas_produtos_ven_pro_valor}*$F{tbl_vendas_produtos_ven_pro_quantidade}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band/>
+	</detail>
+	<pageFooter>
+		<band height="16" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="15" backcolor="#FFFFFF" uuid="e466c151-4695-4456-a622-6cb73ccc7e43"/>
+			</rectangle>
+			<textField>
+				<reportElement style="Detalhes" x="440" y="0" width="100" height="15" uuid="17157ba7-1327-4236-a337-c32ad7ca5abf"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="97" y="0" width="100" height="15" uuid="d50b4c87-b878-4ccc-8327-be5a14a2c986"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Coluna" x="2" y="0" width="95" height="15" uuid="21f0f9bd-a2bd-4569-90de-dcec972659f6"/>
+				<textElement>
+					<font size="10" isBold="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Relatório emitido em:]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="110">
+			<rectangle>
+				<reportElement x="354" y="5" width="99" height="20" backcolor="#FFFFFF" uuid="4da2f010-661a-488a-bd11-50d18e3b6940"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="354" y="25" width="99" height="20" backcolor="#FFFFFF" uuid="97da800e-b8f4-430f-8019-f9dbbff29690"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="354" y="51" width="99" height="20" backcolor="#C0C0C0" uuid="5f3661f4-991d-42fd-b365-bc2e82d5823d"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="453" y="5" width="100" height="20" backcolor="#CCFFCC" uuid="a630e459-d015-4d8a-9f96-70ccee9a78d4"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="453" y="25" width="100" height="20" backcolor="#CCFFCC" uuid="608b1c9b-0459-4b25-b9d7-57b29194f0cf"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="453" y="51" width="100" height="20" backcolor="#C0C0C0" uuid="3ac5d458-6a9d-4839-8bf3-c3feb2a07a7f"/>
+			</rectangle>
+			<textField>
+				<reportElement mode="Transparent" x="461" y="25" width="92" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="b314cc24-3db5-4f0d-ba9a-9e2965887a2b"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_vendas_ven_desconto}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="354" y="25" width="99" height="20" uuid="2eb8f713-489a-470a-8021-6cdaa97f6fe1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCONTO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="51" width="99" height="20" uuid="a42d8f9e-ccfa-4ac3-bd6d-1c95f64bac98"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[VALOR TOTAL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="5" width="99" height="20" uuid="6bb4c40e-f102-4c8c-b5bd-5fa1f2448de4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[VALOR DA VENDA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Transparent" x="461" y="51" width="92" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="022d357c-5a77-435c-8bca-311141410391"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_vendas_ven_valor_liquido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Transparent" x="461" y="5" width="92" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="2a11ea1c-ef96-4454-9440-7b16649f5666"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbl_vendas_ven_valor_bruto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

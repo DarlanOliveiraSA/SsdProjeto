@@ -1,0 +1,17 @@
+'Nome da empresa padrão'
+------------------------------
+-       CUPOM NÃO FISCAL     -
+------------------------------
+Cod | QTD | Preço | Descrição 
+27  1 58.0 GLP 8Kg
+ ------------------------------
+Total da compra: R$ 58.0
+Descontos      : R$ 0.0
+Total a pagar  : R$ 58.0
+------------------------------
+Obrigado pela preferência! 
+03/01/2020 - 16:23 - PM
+------------------------------
+
+
+

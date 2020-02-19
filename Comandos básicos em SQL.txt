@@ -1,0 +1,145 @@
+Comando usado para buscar as ultimas vendas do cliente
+SELECT cli_nome, pro_nome, ven_pro_quantidade
+FROM tbl_produto
+INNER join tbl_vendas_produtos on tbl_vendas_produtos.fk_produto = tbl_produto.pk_id_produto 
+INNER JOIN tbl_vendas on tbl_vendas_produtos.fk_vendas = tbl_vendas.pk_id_vendas
+INNER JOIN tbl_cliente on tbl_cliente.pk_id_cliente = tbl_vendas.fk_cliente
+WHERE pk_id_cliente = 3
+
+
+/*Nome do cliente, 
+Nome do produto*/
+
+
+
+
+1. Cria Banco de Dados:
+
+**************************************
+EXEMPLO USANDO DBSSD
+***************************************
+SELECT  A.ven_data_venda, B.fk_vendas, B.fk_produto, C.pro_nome, B.ven_pro_valor, B.ven_pro_quantidade, A.ven_valor_liquido, a.ven_valor_bruto, A.ven_desconto FROM tbl_vendas AS A INNER JOIN tbl_vendas_produtos AS B ON A.pk_id_vendas = B.fk_vendas 
+INNER JOIN tbl_produto AS C ON C.pk_id_produto = B.fk_produto
+
+
+
+
+
+CREATE DATABEASE Supermercado; //Supermercado nome do banco de dados tipo dbvendas dbssd
+USE Supermercado; //Serve para dizer que os próximos comandos serão usados na tabela Supermecado
+
+2. Cria Tabelas no banco criado:
+CREATE TABLE Fornecedores 
+//Fornecedores é o nome da tabela, tipo tbl_vendas
+(Cod_forn SMALLINT PRIMARY KEY, Nome_Forn VARCHAR (50)); 
+
+//neste caso a tabela Fornecedores tem duas colunas uma contendo o código e outra contend o nome
+//O Código é uma chave primária do tipo SMallInt e o nome é um varchar de 50 caracteres.
+
+ Para criar chave estrangeira
+CREATE TABLE Produtos (
+ID_Prod SmallInt Primary Key.
+Quant_Prod Varchar (50) NOT NULL, //Not null significa que o valor da quantidade não pode ser nulo//
+Preco_Prod Decimal(10,2), //siginifca que o preço tem até 10 caracteres e duas casas decimais10,2
+Cod_Forn SmallInt,
+CONSTRAINT fk_cod_fornec FOREIGN KEY (Cod_Fornec) REFERENCES Fornecedores(Cod_Fornec));
+
+//Significa que a chave estrangeira fk_cod_fornec será atribuída a coluna Cod_Fornec da tabela atual e busca a referência da tabela Fornecedores(Cod_Fornec)
+
+3. inserir dados na tabela: INSERT INTO
+
+INSERT INTO Fornecedores(Cod_Fornec, Nome_Fornec) VALUES (1, "ACME");
+//Comando básico, insere na tabela fornecedores o código 1 para a empresa chamada ACME.
+//Os comandos dentro do VALUES( )SÃO DEFINIDOS DE ACORDO COM A ORDEM que forem escritas no parametro exemplo, se eu inverter "acme", 1 em tese salvaria o nome ACME no Cod_Fornec..
+
+no exemplo a seguir os VALUES são passados diretamente para as colunas de acordo com a ordem de criação das colunas
+
+INSERT INTO Produtos VALUES(100, "Monitor LCD", 12, 550.00,1),
+(101, "Roteador", 12, 550.00,1),
+(102, "Teclado", 8, 130.00,1),
+(103, "Pendrive", 15, 40.00,1),
+(104, "Webcan", 6, 170.00,1);
+
+Não preciso fazer o comando toda hora para inserir vários produtos neste caso já posso passar todos os valores da minha tabela de produtos e inserir vários produtos na tabela separando por virgula.
+
+4. Efetuar consulta no banco de dados trazendo colunas específicas: SELECT
+
+SELECT Nome_Fornec FROM Fornecedores; 
+// Este comando busca todos os itens da coluna Nome_Fornec da tabela Fornecedores, retorna apenas os nomes da tabela e nada mais.
+//O From serve para escolher em qual tabela estarei buscando os dados da coluna.
+
+//Ou seja, quero buscar os nomes da tabela Fornecedores "Nomes FROM Fornecedores..."
+
+SELECT Nome_Prod, Preco_Prod FROM Produtos;
+
+//Este comando pode trazer também mais de uma coluna da tabela desde que eu eu separe por virgula usando o mesmo método anterior
+//O resultado do comando acima vai me trazer os nomes e os preços dos produtos cadastrados na tabela Produtos.
+
+SELECT * FROM Produtos;
+
+//Este comando já me traz todos as colunas da tabela Produtos, retorna todos os dados da tabela
+
+5. Filtra os dados que serão buscados na tabela: WHERE.
+
+SELECT Nome_Prod FROM Produtos;
+WHERE ID_Prod = 101;
+
+//O Comando where diz ao SQL que só vou precisar retornar os nomes onde "where signficia onde", o ID_Prod = 101;
+//Resumindo, estou buscando o produto pelo ID
+
+6. Alterar um registro que já existe na tabela: UPDATE
+
+UPDATE Produtuos SET Preco_Prod = 630.00 WHERE ID_Prod = 100;
+
+Muita atenção, é quase obrigatório ter o WHERE , caso contrário vai mudar todos os preços da tabela toda para 630.
+//Este comando atualiza na tabela Produtos o preco_prod para 630 mas eu preciso escolher qual produto eu quero escolher sempre terei que usar o comando WHERE e escolher pra onde o preço está sendo SETADO, no caso ascima foi setado no produto que tem o ID_Prod = 100;
+
+7. Excluir registros de uma Tablea: DELETE FROM
+
+DELETE FROM PrOdotos
+Where ID_Prod = 101;
+
+//Neste caso o Comando deleta apenas o produto que foi escolhido no WHERE através do ID_Prod
+Muita atenção, é quase obrigatório ter o WHERE , caso contrário vai deletar toda a tabela.
+
+8. Buscar dados de duas tabelas ao mesmo tempo que tem relacionamento. (FOREIGN KEY): INNER JOIN
+
+SELECT Nome_Prod, Nome_Fornec
+FROM Fornecedores //té aqui não funcionaria pois na tabela Fornecedores não tem o nome do produto por exemplo mas usando a continuação Inner Join Produtos eu consigo buscar os dois...
+INNER JOIN Produtos ON Fornecedores.Cod_Fornec = Prodtuos.Cod_Fornec;
+
+//Nesta parte do comando que escolho as relações que quero "ON Fornecedores.Cod_Fornec = Prodtuos.Cod_Fornec"
+//É possível fazer inner join com mais de duas tabelas e também é possível usar o WHERE para buscar apenas um produto específico.
+
+Exemplo, só o produto com o código 101, buscar o nome, código e o fornecedor ficaria assim
+SELECT Nome_Prod, Nome_Fornec
+FROM Fornecedores 
+INNER JOIN Produtos ON Fornecedores.Cod_Fornec = Prodtuos.Cod_Fornec;
+Where ID_Prod = 101;
+
+9. Buscar os dados em uma tabela e retornar eles em ordem Alfabética: ORDER BY.
+
+SELECT Nome_Prod, Preco_Prod
+FROM Produtos
+ORDER BY Nome_Prod;
+
+//Serve para ordenar através da coluna Nome_Prod eu poderia ordenar pelo preço também apenas alterando o ORDER BY assim:
+SELECT Nome_Prod, Preco_Prod
+FROM Produtos
+ORDER BY Preco_Prod;
+
+//Também posso usar vários filtros, como por exemplo Preco_Prod, Nome juntos aí quando der empate vai tentar ordenar pela segunda opção passada como parametro, exemplo:
+SELECT Nome_Prod, Preco_Prod
+FROM Produtos
+ORDER BY Preco_Prod, Nome_Prod; 
+//Neste caso se tiver dois produtos com o preço igual o que tiver o nome em ordem crescente ficará na frente....
+
+10. Comando para excluir tudo da tabela: TRUNCATE TABLE
+Serve para apagar todos os dados da tabela e zera tudo, apenas para testes mesmo.
+
+TRUNCATE TABLE Produtos;
+
+
+
+
+
