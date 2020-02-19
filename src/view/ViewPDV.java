@@ -19,13 +19,14 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import model.ModelProduto;
+import model.ModelProdutosDaVenda;
 import model.ModelSessaoUsuario;
 import model.ModelVendas;
-import model.ModelProdutosDaVenda;
 import util.BLDatas;
 import util.Calculos;
 
@@ -813,13 +814,13 @@ public class ViewPDV extends javax.swing.JFrame {
     private void mudarLogo() {
         if (logoDoCliente.exists()) {
             ImageIcon imagem = new ImageIcon(logoDoCliente.getAbsolutePath());
-            imagem = calcularNovaImagem(imagem);
+            imagem = ajustarImgEmLabel(imagem,jlLogo);
             jlLogo.setIcon(imagem);
             ultimaPasta = new File(logoDoCliente.getAbsolutePath());
 
         } else {
             ImageIcon imagem = new ImageIcon(logoDaEmpresa.getAbsolutePath());
-            imagem = calcularNovaImagem(imagem);
+            imagem = ajustarImgEmLabel(imagem,jlLogo);
             jlLogo.setIcon(imagem);
             ultimaPasta = new File(logoDaEmpresa.getAbsolutePath());
         }
@@ -839,34 +840,46 @@ public class ViewPDV extends javax.swing.JFrame {
         out.close();
     }
 
-    public ImageIcon calcularNovaImagem(ImageIcon pImagem) {
+    /**
+     * Este método redimensiona a imagem considerando o tamanho da label. Ele
+     * ajusta automaticamente ao ponto menor, supondo que a imagem seja mais
+     * larga que a label. O método reduz a escala da imagem para se encaixar na
+     * largura. E se a largura for menor ele se ajusta também a altura sem
+     * perder a proporção.
+     *
+     * @param pImagem
+     * @return
+     */
+    public ImageIcon ajustarImgEmLabel(ImageIcon pImagem,JLabel plogo) {
 
-        double imagemFileL = pImagem.getIconWidth();
-        double imagemFileA = pImagem.getIconHeight();
-        double larguraDaLabel = jlLogo.getWidth();
-        double alturaDaLabel = jlLogo.getHeight();
+        double larguraDaImagem = pImagem.getIconHeight();
+        double alturaDaImagem = pImagem.getIconWidth();
 
-        double hipotenusa = Math.sqrt(imagemFileA + imagemFileL); // hipotenusa = raiz de lado vezes altura 7,74
-        double hipotenusaReduzidaPelaLarguradaLabel = (larguraDaLabel * hipotenusa) / imagemFileL; //regra de 3 para achar a hipotenusa reduzida x = largura atual * hipotenusa / largura da imagem
-        double novaAlturaImagem = (hipotenusaReduzidaPelaLarguradaLabel * imagemFileA) / hipotenusa; //regra de 3
+        double larguraDaLabel = plogo.getWidth();
+        double alturaDaLabel = plogo.getHeight();
+        
+        //Encontra a distancia de um ponto a outro da imágem cruzando pelo centro.
+        double distanciaCentral = Math.sqrt(larguraDaImagem + alturaDaImagem); // distanciaCentral = raiz de lado vezes altura
+        double percentReducaoPelaLargura = (larguraDaLabel * distanciaCentral) / alturaDaImagem; //regra de 3 para achar o percentual de redução x = largura atual * distanciaCentral / largura da imagem
+        double novaAlturaImagem = (percentReducaoPelaLargura * larguraDaImagem) / distanciaCentral; //regra de 3
 
-        imagemFileA = novaAlturaImagem;
-        imagemFileL = larguraDaLabel;
+        larguraDaImagem = novaAlturaImagem;
+        alturaDaImagem = larguraDaLabel;
 
         if (novaAlturaImagem > alturaDaLabel) {
-            hipotenusa = Math.sqrt(imagemFileA + imagemFileL); // hipotenusa = raiz de lado vezes altura 7,74
-            double hipotenusaReduzidaPelaAlturaDaLabel = (alturaDaLabel * hipotenusa) / imagemFileA; //regra de 3 para achar a hipotenusa reduzida x = largura atual * hipotenusa / largura da imagem
-            double novaLargura = (hipotenusaReduzidaPelaAlturaDaLabel * imagemFileL) / hipotenusa; //regra de 3
-            imagemFileA = alturaDaLabel;
-            imagemFileL = novaLargura;
+            distanciaCentral = Math.sqrt(larguraDaImagem + alturaDaImagem); // distanciaCentral = raiz de lado vezes altura
+            double hipotenusaReduzidaPelaAlturaDaLabel = (alturaDaLabel * distanciaCentral) / larguraDaImagem; //regra de 3 para achar o percentual de redução x = largura atual * distanciaCentral / largura da imagem
+            double novaLargura = (hipotenusaReduzidaPelaAlturaDaLabel * alturaDaImagem) / distanciaCentral; //regra de 3
+            larguraDaImagem = alturaDaLabel;
+            alturaDaImagem = novaLargura;
         } else {
-            hipotenusa = Math.sqrt(imagemFileA + imagemFileL); // hipotenusa = raiz de lado vezes altura 7,74
-            hipotenusaReduzidaPelaLarguradaLabel = (larguraDaLabel * hipotenusa) / imagemFileL; //regra de 3 para achar a hipotenusa reduzida x = largura atual * hipotenusa / largura da imagem
-            novaAlturaImagem = (hipotenusaReduzidaPelaLarguradaLabel * imagemFileA) / hipotenusa; //regra de 3
+            distanciaCentral = Math.sqrt(larguraDaImagem + alturaDaImagem); // distanciaCentral = raiz de lado vezes altura
+            percentReducaoPelaLargura = (larguraDaLabel * distanciaCentral) / alturaDaImagem; //regra de 3 para achar o percentual de redução x = largura atual * distanciaCentral / largura da imagem
+            novaAlturaImagem = (percentReducaoPelaLargura * larguraDaImagem) / distanciaCentral; //regra de 3
 
         }
 
-        pImagem.setImage(pImagem.getImage().getScaledInstance((int) imagemFileL, (int) imagemFileA, 1));
+        pImagem.setImage(pImagem.getImage().getScaledInstance((int) alturaDaImagem, (int) larguraDaImagem, 1));
 
         return pImagem;
     }
@@ -889,7 +902,7 @@ public class ViewPDV extends javax.swing.JFrame {
         if (arqEscolhido.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             String caminhoDoArquivo = arqEscolhido.getSelectedFile().getAbsolutePath();
             ImageIcon imagem = new ImageIcon(caminhoDoArquivo);
-            imagem = calcularNovaImagem(imagem);
+            imagem = ajustarImgEmLabel(imagem,jlLogo);
 
             jlLogo.setIcon(imagem);
             File file = new File(caminhoDoArquivo);
