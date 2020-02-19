@@ -4,8 +4,7 @@
  * and open the template in the editor.
  */
 package view;
- //teste
-// adicionando teste
+
 import java.awt.Color;
 import java.util.GregorianCalendar;
 import javax.swing.JButton;
