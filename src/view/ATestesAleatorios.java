@@ -1,10 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
+/*//GEN-FIRST:event_jbRetrocederActionPerformed
+ * To change this license header, choose License Headers in Project Properties.//GEN-LAST:event_jbRetrocederActionPerformed
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package view;
- //teste 
+ //teste
 
 import java.awt.Color;
 import java.util.GregorianCalendar;
@@ -124,7 +124,7 @@ public class ATestesAleatorios extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
 
 
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         jpTopoDataInicial = new javax.swing.JPanel();
@@ -240,11 +240,11 @@ public class ATestesAleatorios extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
-    private void jbRetrocederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRetrocederActionPerformed
+    private void jbRetrocederActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // TODO add your handling code here:
-    }//GEN-LAST:event_jbRetrocederActionPerformed
+    }                                            
 
     /**
      * @param args the command line arguments
@@ -283,7 +283,7 @@ public class ATestesAleatorios extends javax.swing.JFrame {
     }
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -297,5 +297,5 @@ public class ATestesAleatorios extends javax.swing.JFrame {
     private javax.swing.JPanel jpCorpoCalendario;
     private javax.swing.JPanel jpTopoDataInicial;
     private javax.swing.JFormattedTextField jtfDataAtual;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 }
