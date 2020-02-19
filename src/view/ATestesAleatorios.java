@@ -8,7 +8,6 @@ package view;
 
 
 import java.awt.Color;
-import java.awt.GridLayout;
 import java.util.GregorianCalendar;
 import javax.swing.JButton;
 import util.BLDatas;
