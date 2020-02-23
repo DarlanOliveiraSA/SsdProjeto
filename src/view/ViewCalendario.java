@@ -43,23 +43,17 @@ public class ViewCalendario extends javax.swing.JFrame {
         int anoAtual = datas.get(datas.YEAR);
 
         datas.set(anoAtual, mesAtual - 1, diaAtual);
-        System.out.println("Data salva atual: " + datas.getTime());
-        System.out.println("data de hoje: " + diaAtual + "/" + mesAtual + "/" + anoAtual);
 
         datas.set(anoAtual, mesAtual - 1, diaAtual);
         int quantidadeDiasNoMes = datas.getActualMaximum(datas.DAY_OF_MONTH);
-        System.out.println("ultimo dia deste mês: " + quantidadeDiasNoMes);
 
         datas.set(datas.DAY_OF_MONTH, 1);
 
         int semanaDia = datas.get(datas.DAY_OF_WEEK);//DIA DA SEMANA 1 SEGUNDA 7 DOMINGO
-        System.out.println("dia da semana que o mes selecionado começa: " + semanaDia);
 
         int ultimoDiaMesPassado = datas.getMaximum(datas.DAY_OF_MONTH);
-        System.out.println("ultimo dia mes passado: " + ultimoDiaMesPassado);
 
         int contadorPassado = ultimoDiaMesPassado - semanaDia + 2;
-        System.out.println("dias exibidos do mespassado: " + contadorPassado);
 
         int cont = 0;
         boolean mespass = false;
@@ -74,7 +68,6 @@ public class ViewCalendario extends javax.swing.JFrame {
                 for (int i = 0; i < semanaDia - 1; i++) {
                     jb2 = new JButton(String.valueOf(contadorPassado++));
                     jb2.setBackground(Color.gray);
-                    System.out.println("prim" + cont);
                     jpCorpoCalendario.add(jb2);
                     cont++;
 
@@ -90,7 +83,6 @@ public class ViewCalendario extends javax.swing.JFrame {
                         jb1.setBackground(Color.blue);
                     }
 
-                    System.out.println("seg" + cont);
                     jpCorpoCalendario.add(jb1);
                     cont++;
                     mesagora = true;
@@ -99,7 +91,6 @@ public class ViewCalendario extends javax.swing.JFrame {
             }
 
             jb2 = new JButton(String.valueOf(bt3++));
-            System.out.println("ter" + cont);
             jpCorpoCalendario.add(jb2);
             jb2.setBackground(Color.gray);
             cont++;
