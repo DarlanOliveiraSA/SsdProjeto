@@ -11,22 +11,6 @@ import javax.swing.JButton;
 import util.BLDatas;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /**
  *
  * @author user
