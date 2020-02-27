@@ -102,6 +102,25 @@ public class BLDatas {
         SimpleDateFormat teste = new SimpleDateFormat("dd/MM/yyyy hh:mm");	
         return teste.format(date);
     }	
+    
+        /**
+     *retornar data e hora tempo real
+     * @return 
+     */
+    public String retornarDataHojeUS(){
+        Date date = new Date(); 
+        SimpleDateFormat teste = new SimpleDateFormat("yyyy/MM/dd");	
+        return teste.format(date);
+    }
+            /**
+     *retornar data e hora tempo real
+     * @return 
+     */
+    public String retornarDataHojeBR(){
+        Date date = new Date(); 
+        SimpleDateFormat teste = new SimpleDateFormat("dd/MM/yyyy");	
+        return teste.format(date);
+    }
 
     
 /** 
