@@ -39,6 +39,7 @@ public class ViewLogin extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         adicionarMovimentoMouseNoPainel(jPanel1);
         redimensionarLogo.redimensionarLogo(jlLogo);
+        
 
     }
 

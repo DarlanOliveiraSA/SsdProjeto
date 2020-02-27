@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import util.Mensagens;
 import util.Formatador;
 
@@ -56,8 +58,8 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jlDataHora = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jbVendas1 = new javax.swing.JButton();
-        jbVendas = new javax.swing.JButton();
+        jbPedidoNovo = new javax.swing.JButton();
+        jbPedidosRealisados = new javax.swing.JButton();
         jbClientes = new javax.swing.JButton();
         jbProdutos = new javax.swing.JButton();
         jbUsuarios = new javax.swing.JButton();
@@ -125,25 +127,25 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(146, 207, 246));
         jPanel1.setLayout(new java.awt.GridLayout(2, 3, 5, 5));
 
-        jbVendas1.setBackground(new java.awt.Color(204, 255, 204));
-        jbVendas1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jbVendas1.setText("Cadastrar pedido");
-        jbVendas1.addActionListener(new java.awt.event.ActionListener() {
+        jbPedidoNovo.setBackground(new java.awt.Color(204, 255, 204));
+        jbPedidoNovo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jbPedidoNovo.setText("Cadastrar pedido");
+        jbPedidoNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbVendas1ActionPerformed(evt);
+                jbPedidoNovoActionPerformed(evt);
             }
         });
-        jPanel1.add(jbVendas1);
+        jPanel1.add(jbPedidoNovo);
 
-        jbVendas.setBackground(new java.awt.Color(204, 255, 204));
-        jbVendas.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jbVendas.setText("Pedidos realizados");
-        jbVendas.addActionListener(new java.awt.event.ActionListener() {
+        jbPedidosRealisados.setBackground(new java.awt.Color(204, 255, 204));
+        jbPedidosRealisados.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jbPedidosRealisados.setText("Visualisar pedidos realizados");
+        jbPedidosRealisados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbVendasActionPerformed(evt);
+                jbPedidosRealisadosActionPerformed(evt);
             }
         });
-        jPanel1.add(jbVendas);
+        jPanel1.add(jbPedidosRealisados);
 
         jbClientes.setBackground(new java.awt.Color(204, 255, 204));
         jbClientes.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -371,13 +373,13 @@ public class ViewPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jbVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVendasActionPerformed
+    private void jbPedidosRealisadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPedidosRealisadosActionPerformed
         // TODO add your handling code here:
         viewVisualizarVendas.dispose();
         viewVisualizarVendas = new ViewVisualizarVendas();
         viewVisualizarVendas.setViewTelaVendas(viewVendas);
         viewVisualizarVendas.setVisible(true);
-    }//GEN-LAST:event_jbVendasActionPerformed
+    }//GEN-LAST:event_jbPedidosRealisadosActionPerformed
 
     private void jbClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbClientesActionPerformed
         // TODO add your handling code here:
@@ -417,13 +419,13 @@ public class ViewPrincipal extends javax.swing.JFrame {
          */
     }//GEN-LAST:event_jbUsuarios1ActionPerformed
 
-    private void jbVendas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVendas1ActionPerformed
+    private void jbPedidoNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPedidoNovoActionPerformed
         viewVendas.dispose();
         viewVendas = new ViewVendasFinal();
         viewVendas.iniciarNovaVenda();
         viewVendas.limparFormulario();
         viewVendas.setVisible(true);
-    }//GEN-LAST:event_jbVendas1ActionPerformed
+    }//GEN-LAST:event_jbPedidoNovoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -471,11 +473,11 @@ public class ViewPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JButton jbClientes;
+    private javax.swing.JButton jbPedidoNovo;
+    private javax.swing.JButton jbPedidosRealisados;
     private javax.swing.JButton jbProdutos;
     private javax.swing.JButton jbUsuarios;
     private javax.swing.JButton jbUsuarios1;
-    private javax.swing.JButton jbVendas;
-    private javax.swing.JButton jbVendas1;
     private javax.swing.JLabel jlDataHora;
     private javax.swing.JLabel jlLogo;
     private javax.swing.JLabel jlNomeUsuario;
