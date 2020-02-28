@@ -25,7 +25,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
      */
     public ViewPrincipal() {
 
-        setExtendedState(MAXIMIZED_BOTH);
+        //setExtendedState(MAXIMIZED_BOTH);
         initComponents();
 
         jlDataHora.setText(mensagem.dataHoraAtual);
@@ -34,8 +34,8 @@ public class ViewPrincipal extends javax.swing.JFrame {
         this.addComponentListener(new java.awt.event.ComponentAdapter() {
             @Override
             public void componentShown(java.awt.event.ComponentEvent evt) {
-                System.out.println("Redimensionando imagem de fundo");
-                formatador.redimensionarLogo(jlLogo);
+
+                formatador.redimensionarLogo(jlLogo,"Logo_FundoPrincipal");
 
             }
         });
@@ -197,9 +197,9 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jlLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jlLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(

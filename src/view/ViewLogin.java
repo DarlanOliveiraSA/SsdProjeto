@@ -28,7 +28,7 @@ public class ViewLogin extends javax.swing.JFrame {
     Mensagens mensagem1 = new Mensagens();
     BLDatas calendario = new BLDatas();
     ViewPrincipal viewPrincipal = new ViewPrincipal();
-    Formatador redimensionarLogo = new Formatador();
+    Formatador formatador = new Formatador();
 
     /**
      * Creates new form ViewLogin
@@ -38,7 +38,7 @@ public class ViewLogin extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         adicionarMovimentoMouseNoPainel(jPanel1);
-        redimensionarLogo.redimensionarLogo(jlLogo);
+        formatador.redimensionarLogo(jlLogo,"Logo_TelaLogin");
         
 
     }
@@ -72,7 +72,6 @@ public class ViewLogin extends javax.swing.JFrame {
         jmiOnline = new javax.swing.JMenuItem();
         jmiOffline = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login - SSD");
         setUndecorated(true);
         setResizable(false);
@@ -179,7 +178,6 @@ public class ViewLogin extends javax.swing.JFrame {
         jlLogo.setBackground(new java.awt.Color(255, 255, 255));
         jlLogo.setForeground(new java.awt.Color(255, 255, 255));
         jlLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Fundos/Logo SSD Rev00.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

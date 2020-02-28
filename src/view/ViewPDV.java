@@ -21,7 +21,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import model.ModelProduto;
 import model.ModelProdutosDaVenda;
@@ -29,6 +28,7 @@ import model.ModelSessaoUsuario;
 import model.ModelVendas;
 import util.BLDatas;
 import util.Calculos;
+import util.Formatador;
 
 /**
  *
@@ -49,10 +49,8 @@ public class ViewPDV extends javax.swing.JFrame {
     private ViewPagamentoPDV viewPagamentoPDV;
     Calculos vender = new Calculos();
 
-    JFileChooser arqEscolhido = new JFileChooser();
-    File ultimaPasta = new File("c:/");
-    File logoDoCliente = new File("C:/SSDprojeto/src/imagens/logoCliente.jpg");
-    File logoDaEmpresa = new File("C:/SSDprojeto/src/imagens/logo da empresa.jpg");
+    
+    Formatador formatador = new Formatador();
     int quantidade = 1; // Quantidade de produtos a ser vendida, inicia com 1 e muda ao pressionar a tecla de comando F3
     KeyAdapter acaodobotao = new java.awt.event.KeyAdapter() {
 
@@ -74,14 +72,14 @@ public class ViewPDV extends javax.swing.JFrame {
         jTfCodigoProduto.requestFocus();
         setarOperador();
         this.viewPagamentoPDV = new ViewPagamentoPDV(this, true);
-        mudarLogo();
+        formatador.redimensionarLogo(jlLogo, "Logo_PDV");
         limparFormulario();
 
         this.addKeyListener(acaodobotao);
         addComponentListener(new java.awt.event.ComponentAdapter() {
             @Override
             public void componentResized(java.awt.event.ComponentEvent evt) {
-                mudarLogo();
+                formatador.redimensionarLogo(jlLogo, "Logo_PDV");
             }
         });
 
@@ -343,7 +341,6 @@ public class ViewPDV extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         jlLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/logoCliente.jpg"))); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -351,7 +348,7 @@ public class ViewPDV extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addComponent(jlLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addComponent(jlLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -527,7 +524,7 @@ public class ViewPDV extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        escolherLogo();
+        formatador.escolherLogo(jlLogo, "Logo_PDV");
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void adicionarProduto(KeyEvent e) {
@@ -811,20 +808,7 @@ public class ViewPDV extends javax.swing.JFrame {
         }
     }
 
-    private void mudarLogo() {
-        if (logoDoCliente.exists()) {
-            ImageIcon imagem = new ImageIcon(logoDoCliente.getAbsolutePath());
-            imagem = ajustarImgEmLabel(imagem,jlLogo);
-            jlLogo.setIcon(imagem);
-            ultimaPasta = new File(logoDoCliente.getAbsolutePath());
-
-        } else {
-            ImageIcon imagem = new ImageIcon(logoDaEmpresa.getAbsolutePath());
-            imagem = ajustarImgEmLabel(imagem,jlLogo);
-            jlLogo.setIcon(imagem);
-            ultimaPasta = new File(logoDaEmpresa.getAbsolutePath());
-        }
-    }
+    
 
     private void copiarArquivo(File fonte, File destino) throws IOException {
 
@@ -884,41 +868,9 @@ public class ViewPDV extends javax.swing.JFrame {
         return pImagem;
     }
 
-    public void escolherLogo() {
+    
 
-        arqEscolhido.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        FileNameExtensionFilter extensãoDasImagens = new FileNameExtensionFilter("Arquivos JPG , PNG e BMP", "jpg", "png", "bmp");
-        arqEscolhido.addChoosableFileFilter(extensãoDasImagens);
-        arqEscolhido.setAcceptAllFileFilterUsed(false);
-
-        try {
-            String ca = arqEscolhido.getSelectedFile().getAbsolutePath();
-            ultimaPasta = new File(ca);
-            arqEscolhido.setCurrentDirectory(ultimaPasta);
-        } catch (NullPointerException e) {
-            arqEscolhido.setCurrentDirectory(ultimaPasta);
-        }
-
-        if (arqEscolhido.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-            String caminhoDoArquivo = arqEscolhido.getSelectedFile().getAbsolutePath();
-            ImageIcon imagem = new ImageIcon(caminhoDoArquivo);
-            imagem = ajustarImgEmLabel(imagem,jlLogo);
-
-            jlLogo.setIcon(imagem);
-            File file = new File(caminhoDoArquivo);
-            arqEscolhido.setCurrentDirectory(file);
-            try {
-
-                copiarArquivo(file, logoDoCliente);
-            } catch (IOException ex) {
-                System.out.println(ex.getMessage());
-            }
-
-        } else {
-            mudarLogo();
-        }
-
-    }
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
