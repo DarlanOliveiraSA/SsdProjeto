@@ -58,7 +58,6 @@ public class ViewVisualizarVendas extends javax.swing.JFrame {
         carregarVendas();
         viewTelaVendas.dispose();
         setAlwaysOnTop(true);
-        
 
     }
 
@@ -376,12 +375,13 @@ public class ViewVisualizarVendas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JbVisualizarVenda)
-                    .addComponent(jbImprimirVenda)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jbExcluir)
-                        .addComponent(jbAlterar)))
+                        .addComponent(jbAlterar))
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(JbVisualizarVenda)
+                        .addComponent(jbImprimirVenda)))
                 .addGap(13, 13, 13))
         );
 
@@ -725,8 +725,9 @@ public class ViewVisualizarVendas extends javax.swing.JFrame {
             carregarVendasPorData(formatarData.converterDataStringParaDate(viewCalendario.getDataSelecionada()));
 
         } catch (NullPointerException npe) {
-
+            npe.printStackTrace();
         } catch (Exception e) {
+            e.printStackTrace();
         }
 
 
@@ -805,18 +806,17 @@ public class ViewVisualizarVendas extends javax.swing.JFrame {
         }
     }
 
-    void carregarVendasPorData(Date pDate) {
+    private void carregarVendasPorData(Date pDate) {
 
         DefaultTableModel modelo = (DefaultTableModel) jtVendas.getModel();
         listaModelVendasClientes = controllerVendasCliente.getBuscarVendasPorDataController(pDate);
 
         int cont = listaModelVendasClientes.size();
-        System.out.println(pDate.toString());
 
         //Limpa tabela antes de carregar
         modelo.setNumRows(0);
         for (int i = 0; i < cont; i++) {
-            System.out.println(listaModelVendasClientes.get(i).getModelCliente().getCliNome());
+
             modelo.addRow(new Object[]{
                 listaModelVendasClientes.get(i).getModelVendas().getIdVenda(),
                 listaModelVendasClientes.get(i).getModelCliente().getCliNome(),

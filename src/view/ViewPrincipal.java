@@ -25,7 +25,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
      */
     public ViewPrincipal() {
 
-        //setExtendedState(MAXIMIZED_BOTH);
+        setExtendedState(MAXIMIZED_BOTH);
         initComponents();
 
         jlDataHora.setText(mensagem.dataHoraAtual);
@@ -187,9 +187,10 @@ public class ViewPrincipal extends javax.swing.JFrame {
         });
         jPanel1.add(jbUsuarios1);
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBackground(new java.awt.Color(204, 255, 204));
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jlLogo.setBackground(new java.awt.Color(255, 255, 255));
         jlLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlLogo.setAutoscrolls(true);
 

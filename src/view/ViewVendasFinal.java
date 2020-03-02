@@ -11,6 +11,7 @@ import controller.ControllerProdutosVendasProdutos;
 import controller.ControllerVendas;
 import controller.ControllerVendasProdutos;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -32,15 +33,17 @@ import javax.print.SimpleDoc;
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
 import javax.print.attribute.standard.Copies;
-
 import javax.print.event.PrintJobAdapter;
 import javax.print.event.PrintJobEvent;
+import javax.swing.AbstractAction;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.table.DefaultTableModel;
 import model.ModelCliente;
 import model.ModelProduto;
@@ -123,15 +126,34 @@ public class ViewVendasFinal extends javax.swing.JFrame {
 
     }
 
+    private void configTeclasAtalho() {
+        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0), "F6");
+        rootPane.getRootPane().getActionMap().put("F6", new AbstractAction("F6") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                 salvarEImprimir("teste");
+                System.out.println("aaaaaaaaaaa");
+            }
+        });
+
+        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0), "F5");
+        rootPane.getRootPane().getActionMap().put("F5", new AbstractAction("F5") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                System.out.println("bbbbbbbbb");
+            }
+        });
+    }
+
     private void onload() {
         initComponents();
 
         listarProdutos();
         setLocationRelativeTo(null);
-        //preencherCodigoClientePeloCombobox();
-        //preencherCodigoProdutoPeloCombobox();
         viewCliente.dispose();
         setAlwaysOnTop(true);
+        configTeclasAtalho();
 
     }
 
@@ -168,7 +190,7 @@ public class ViewVendasFinal extends javax.swing.JFrame {
      * @param status
      */
     public void habilitarDesabilitarCampCliente(boolean status) {
-        System.out.println("Habilitar campos Cliente deu"+status);
+        System.out.println("Habilitar campos Cliente deu" + status);
         jtfNomeDoCliente.setEnabled(status);
         jtfBairro.setEnabled(status);
         jtfCidade.setEnabled(status);
@@ -1119,7 +1141,7 @@ public class ViewVendasFinal extends javax.swing.JFrame {
                 .addComponent(jtfPontoDeReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jButton2.setText("Alterar Cliente");
+        jButton2.setText("Editar Cliente");
         jButton2.setPreferredSize(new java.awt.Dimension(120, 25));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1907,8 +1929,10 @@ public class ViewVendasFinal extends javax.swing.JFrame {
         limparFormulario();
     }//GEN-LAST:event_btCancelarPedidoMouseReleased
 
-    private void btSalvarPedidoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btSalvarPedidoMouseReleased
-
+    
+    private void salvar(){
+    
+       
         listaModelProdutos = new ArrayList<>();//reseta o listaModelProdutos para não receber lixos de outras vendas
         modelVendasProdutos = new ModelProdutosDaVenda();//Cria um novo ModelVendas para não ficar nehum lixo das vendas anteriores
         listaModelVendasProdutos = new ArrayList<>();//reseta o listaModelVendasProdutos para não receber lixos de outras vendas
@@ -2201,6 +2225,10 @@ public class ViewVendasFinal extends javax.swing.JFrame {
         viewVisualizarVendas.visualizarVenda(modelVenda.getIdVenda());
 
 
+    
+    }
+    private void btSalvarPedidoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btSalvarPedidoMouseReleased
+salvar();
     }//GEN-LAST:event_btSalvarPedidoMouseReleased
 
     private void uJPanelImagem11MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_uJPanelImagem11MouseReleased
@@ -2478,18 +2506,27 @@ public class ViewVendasFinal extends javax.swing.JFrame {
     String caminhoImpressao = "C:\\SSDProjeto\\src\\relatorios\\cupom.txt";
 
     private void salvarEImprimir(String pConteudo) {
+        salvar();
+        System.out.println("IMPRIMINDO VENDA");
+        System.out.println("IMPRIMINDO VENDA");
+        System.out.println("IMPRIMINDO VENDA");
+        System.out.println("IMPRIMINDO VENDA");
+        System.out.println("IMPRIMINDO VENDA");
+        System.out.println("IMPRIMINDO VENDA");
+        System.out.println("IMPRIMINDO VENDA");
+        System.out.println("IMPRIMINDO VENDA");
 
-        File arquivo = new File(caminhoImpressao);
-        try {
-            FileWriter grava
-                    = new FileWriter(arquivo, false);
-            PrintWriter escreve = new PrintWriter(grava);
-            escreve.println(pConteudo);
-            escreve.close();
-            grava.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+//        File arquivo = new File(caminhoImpressao);
+//        try {
+//            FileWriter grava
+//                    = new FileWriter(arquivo, false);
+//            PrintWriter escreve = new PrintWriter(grava);
+//            escreve.println(pConteudo);
+//            escreve.close();
+//            grava.close();
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//        }
 
         /**
          * Desktop desktop = Desktop.getDesktop();

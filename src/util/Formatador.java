@@ -75,7 +75,7 @@ public class Formatador {
             pImagem.setImage(pImagem.getImage().getScaledInstance((int) imagemFileL, (int) imagemFileA, 1));
             pjLDestino.setIcon(pImagem);
         } catch (Exception e) {
-e.printStackTrace();
+
             JOptionPane.showMessageDialog(new javax.swing.JFrame(), "Você precisa escolher uma logo pois não foi possível localizar uma na pasta padrão.", "Erro : 2802201258", JOptionPane.OK_OPTION);
 
             escolherLogo(pjLDestino, pNomeArquivo);

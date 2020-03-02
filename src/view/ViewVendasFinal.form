@@ -880,7 +880,7 @@
             </Container>
             <Component class="javax.swing.JButton" name="jButton2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Alterar Cliente"/>
+                <Property name="text" type="java.lang.String" value="Editar Cliente"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[120, 25]"/>
                 </Property>

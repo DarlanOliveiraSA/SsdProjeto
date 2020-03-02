@@ -9,7 +9,9 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import javax.swing.JButton;
 import util.BLDatas;
 
@@ -37,6 +39,42 @@ public class ViewCalendario extends javax.swing.JDialog {
         jbHoje.setText("Hoje - " + formatarDatas.retornarDataHojeBR());
        
         
+
+    }
+    
+     private void colorirJbt(JButton jb, int pCont) {
+         
+           ArrayList<Integer> listaDiasColoridos = new ArrayList<>();
+        listaDiasColoridos.add(1);
+        listaDiasColoridos.add(8);
+        listaDiasColoridos.add(15);
+        listaDiasColoridos.add(22);
+        listaDiasColoridos.add(29);
+        listaDiasColoridos.add(36);
+
+
+   
+    
+    for (Iterator<Integer> it = listaDiasColoridos.iterator();
+
+    it.hasNext ();
+
+    
+        ) {
+            Integer integer = it.next();
+        if (integer == pCont+1) {
+            
+            jb.setBackground(Color.red);
+
+        }
+        
+        if (integer == pCont+2) {
+            
+            jb.setBackground(Color.CYAN);
+
+        }
+    }
+         
 
     }
 
@@ -104,7 +142,8 @@ public class ViewCalendario extends javax.swing.JDialog {
         boolean mespass = false;
         boolean mesagora = false;
         int bt3 = 1;
-        JButton jb1 = new JButton();
+        JButton jb1;
+        
         JButton jb2 = new JButton();
         jb2.setBackground(Color.gray);
 
@@ -126,7 +165,7 @@ public class ViewCalendario extends javax.swing.JDialog {
                             System.out.println("dia " + nomeBotao);
                         }
                     });
-
+                    
                     jpCorpoCalendario.add(jb2);
                     cont++;
 
@@ -138,8 +177,9 @@ public class ViewCalendario extends javax.swing.JDialog {
 
                 for (int i = 0; i < quantidadeDiasNoMes; i++) {
                     jb1 = new JButton(String.valueOf(i + 1));
+                    colorirJbt(jb1, cont);
                     if (diaAtual == i + 1) {
-                        jb1.setBackground(Color.blue);
+                        jb1.setBackground(Color.green);
                     }
 
                     final int nomeBotao = i + 1;
@@ -151,6 +191,7 @@ public class ViewCalendario extends javax.swing.JDialog {
                         }
                     });
 
+                    
                     jpCorpoCalendario.add(jb1);
                     cont++;
                     mesagora = true;
@@ -167,6 +208,7 @@ public class ViewCalendario extends javax.swing.JDialog {
                     carregarCalendario(nomeBotao, 1);
                 }
             });
+            
             jpCorpoCalendario.add(jb2);
             jb2.setBackground(Color.gray);
             cont++;
@@ -245,8 +287,9 @@ public class ViewCalendario extends javax.swing.JDialog {
 
         jPanel1.setLayout(new java.awt.GridLayout(1, 7));
 
-        jLabel4.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel4.setBackground(new java.awt.Color(255, 0, 0));
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 0, 0));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("D");
         jLabel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -287,8 +330,9 @@ public class ViewCalendario extends javax.swing.JDialog {
         jLabel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         jPanel1.add(jLabel2);
 
-        jLabel3.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel3.setBackground(new java.awt.Color(0, 0, 255));
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("S");
         jLabel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -416,13 +460,13 @@ public class ViewCalendario extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 
-                ViewCalendario dialog = new ViewCalendario(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
+                ViewCalendario dialog = new ViewCalendario(null, true);
+//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+//                    @Override
+//                    public void windowClosing(java.awt.event.WindowEvent e) {
+//                        System.exit(0);
+//                    }
+//                });
                 dialog.setVisible(true);
             
                 
