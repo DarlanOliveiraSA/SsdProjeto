@@ -35,8 +35,8 @@ public class ClienteViaCepWS {
     }
 
     public static void main(String[] args) throws IOException {
-        String json = buscarCep("30530600").toString();
-        String json = buscarCepRua("30530600").toString();
+        //String json = buscarCep("30530600").toString();
+        String json = buscarCepRua("MG","DEZENOVE","CONTAGEM").toString();
         System.out.println(" JSONN " + json);
  
         Map<String, String> mapa = new HashMap<>();
