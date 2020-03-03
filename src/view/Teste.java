@@ -49,13 +49,13 @@ public class Teste {
         MeuTableModel meuTableModel = new MeuTableModel(listaEnd);
         
         JTable jTable = new JTable(meuTableModel);
+        painel.removeAll();
         
-        jframe = new JFrame();
-        jframe.setSize(500, 500);
-        jframe.setLayout(new GridLayout(1, 1));
-        jframe.add(new JScrollPane(jTable));
-        jframe.setVisible(true);
-        jframe.validate();
+        painel.setSize(500, 500);
+        painel.setLayout(new GridLayout(1, 1));
+        painel.add(new JScrollPane(jTable));
+        painel.setVisible(true);
+        painel.validate();
         
         
         
