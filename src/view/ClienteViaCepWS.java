@@ -38,7 +38,7 @@ public class ClienteViaCepWS {
         String json = buscarCep("30530600").toString();
         String json = buscarCepRua("30530600").toString();
         System.out.println(" JSONN " + json);
-
+ 
         Map<String, String> mapa = new HashMap<>();
 
         Matcher matcher = Pattern.compile("\"\\D.*?\": \".*?\"").matcher(json);
