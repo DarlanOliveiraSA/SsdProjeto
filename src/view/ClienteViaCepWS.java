@@ -5,6 +5,8 @@
  */
 package view;
 
+import static com.sun.glass.ui.Cursor.setVisible;
+import java.awt.GridLayout;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,6 +19,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.json.simple.JSONObject;
 import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import static javax.swing.JFrame.EXIT_ON_CLOSE;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import org.json.simple.JSONArray;
+import org.json.simple.parser.JSONParser;
 
 /**
  *
@@ -24,11 +37,27 @@ import java.io.FileWriter;
  */
 public class ClienteViaCepWS {
 
+    private static ArrayList<Endereco> listaDeEnderecos = new ArrayList<Endereco>();
+
     private static String rua;
     private static String bairro;
     private static String cidade;
     private static String estado;
     private static String cep;
+
+    /**
+     * @return the listaDeEnderecos
+     */
+    public static ArrayList<Endereco> getListaDeEnderecos() {
+        return listaDeEnderecos;
+    }
+
+    /**
+     * @param aListaDeEnderecos the listaDeEnderecos to set
+     */
+    public static void setListaDeEnderecos(ArrayList<Endereco> aListaDeEnderecos) {
+        listaDeEnderecos = aListaDeEnderecos;
+    }
 
     public ClienteViaCepWS() {
 
@@ -36,20 +65,20 @@ public class ClienteViaCepWS {
 
     public static void main(String[] args) throws IOException {
         //String json = buscarCep("30530600").toString();
-        String json = buscarCepRua("MG","DEZENOVE","CONTAGEM").toString();
+        String json = buscarCepRua("MG", "rua", "belo horizonte").toString();
         System.out.println(" JSONN " + json);
- 
-        Map<String, String> mapa = new HashMap<>();
-
-        Matcher matcher = Pattern.compile("\"\\D.*?\": \".*?\"").matcher(json);
-        while (matcher.find()) {
-            String[] group = matcher.group().split(":");
-            mapa.put(group[0].replaceAll("\"", "").trim(), group[1].replaceAll("\"", "").trim());
-        }
-
-        //System.out.println(mapa);
-        JSONObject arquivoJson = new JSONObject();
-        arquivoJson.putAll(mapa);
+// 
+//        Map<String, String> mapa = new HashMap<>();
+//
+//        Matcher matcher = Pattern.compile("\"\\D.*?\": \".*?\"").matcher(json);
+//        while (matcher.find()) {
+//            String[] group = matcher.group().split(":");
+//            mapa.put(group[0].replaceAll("\"", "").trim(), group[1].replaceAll("\"", "").trim());
+//        }
+//
+//        //System.out.println(mapa);
+//        JSONObject arquivoJson = new JSONObject();
+//        arquivoJson.putAll(mapa);
 
     }
 
@@ -120,7 +149,7 @@ public class ClienteViaCepWS {
             //*************************************
             String jsonStringParaMapa = jsonSb.toString();//String completa do json
 
-//        //System.out.println(programadorLista.toJSONString());
+            System.out.println(jsonStringParaMapa + "bbbbbbbbbb");
             try (FileWriter arqJson = new FileWriter("programadores2.json")) {
 
                 arqJson.write(jsonStringParaMapa);
@@ -140,8 +169,52 @@ public class ClienteViaCepWS {
             //System.out.println(mapa);
             JSONObject arquivoJson = new JSONObject();
             arquivoJson.putAll(mapa);
-
             json.putAll(mapa);
+
+            try {
+                JSONParser jsonParser = new JSONParser();
+                Object obj = jsonParser.parse(jsonStringParaMapa);
+                JSONArray programadoresArray = (JSONArray) obj;
+
+                ArrayList testeLista = new ArrayList<Endereco>();
+
+                testeLista = programadoresArray;
+
+                for (int i = 0; i < testeLista.size(); i++) {
+                    Object objteste;
+                    Endereco cliente = new Endereco();
+
+                    objteste = jsonParser.parse(testeLista.get(i).toString());
+
+                    JSONObject endereco = (JSONObject) objteste;
+
+                    cliente.setBairro(endereco.get("bairro").toString());
+                    
+                    cliente.setRua(endereco.get("logradouro").toString());
+
+                    System.out.println(cliente);
+                    
+                    listaDeEnderecos.add(cliente);
+                    
+                    
+                    
+
+                    System.out.println(listaDeEnderecos.size());
+
+                }
+                
+                System.out.println(listaDeEnderecos.get(1).getBairro());
+
+                for (Iterator it = programadoresArray.iterator(); it.hasNext();) {
+                    Object object = it.next();
+
+                }
+
+                //programadoresArray.forEach(programador -> parserProgramador((JSONObject)programador));
+                //arqJsonReader.read();
+            } catch (Exception e) {
+            }
+
             setRua(arquivoJson.get("logradouro").toString());
             setCep(arquivoJson.get("cep").toString());
             setEstado(arquivoJson.get("uf").toString());
@@ -155,8 +228,40 @@ public class ClienteViaCepWS {
         return json;
     }
 
+    public JTable popularJpanel(JPanel painelFundo) {
+        
+        
+                
+              
+
+        
+        JTable tabela;
+        JScrollPane barraRolagem;
+        
+
+        Object[][] dados = {
+            
+        
+            {"Ana Monteiro", "48 9923-7898", "ana.monteiro@gmail.com"},
+            {"João da Silva", "48 8890-3345", "joaosilva@hotmail.com"},
+            {"Pedro Cascaes", "48 9870-5634", "pedrinho@gmail.com"}
+        };
+        
+
+        String[] colunas = {"Nome", "Telefone", "Email"};
+
+        painelFundo.setLayout(new GridLayout(1, 1));
+        tabela = new JTable(dados, colunas);
+        barraRolagem = new JScrollPane(tabela);
+        painelFundo.add(barraRolagem);
+        painelFundo.validate();
+
+        return tabela;
+    }
+
     @Override
     public String toString() {
+
         String string = rua + " - " + bairro + " - " + cidade + " - " + estado + " - " + cep;
         return string;
     }
