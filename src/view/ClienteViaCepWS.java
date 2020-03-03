@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.json.simple.JSONObject;
+import java.io.FileWriter;
 
 /**
  *
@@ -28,6 +29,137 @@ public class ClienteViaCepWS {
     private static String cidade;
     private static String estado;
     private static String cep;
+
+    public ClienteViaCepWS() {
+
+    }
+
+    public static void main(String[] args) throws IOException {
+        String json = buscarCep("30530600").toString();
+        String json = buscarCepRua("30530600").toString();
+        System.out.println(" JSONN " + json);
+
+        Map<String, String> mapa = new HashMap<>();
+
+        Matcher matcher = Pattern.compile("\"\\D.*?\": \".*?\"").matcher(json);
+        while (matcher.find()) {
+            String[] group = matcher.group().split(":");
+            mapa.put(group[0].replaceAll("\"", "").trim(), group[1].replaceAll("\"", "").trim());
+        }
+
+        //System.out.println(mapa);
+        JSONObject arquivoJson = new JSONObject();
+        arquivoJson.putAll(mapa);
+
+    }
+
+    public static JSONObject buscarCep(String cep) {
+        JSONObject json = new JSONObject();
+
+        try {
+            URL url = new URL("http://viacep.com.br/ws/" + cep + "/json");
+            URLConnection urlConnection = url.openConnection();
+            InputStream is = urlConnection.getInputStream();
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+
+            StringBuilder jsonSb = new StringBuilder();
+
+            String inputLine;
+
+            while ((inputLine = br.readLine()) != null) {
+                jsonSb.append(inputLine);
+            }
+            br.close();
+            //*************************************
+            String jsonStringParaMapa = jsonSb.toString();
+            Map<String, String> mapa = new HashMap<>();
+
+            Matcher matcher = Pattern.compile("\"\\D.*?\": \".*?\"").matcher(jsonStringParaMapa);
+            while (matcher.find()) {
+                String[] group = matcher.group().split(":");
+                mapa.put(group[0].replaceAll("\"", "").trim(), group[1].replaceAll("\"", "").trim());
+            }
+
+            //System.out.println(mapa);
+            JSONObject arquivoJson = new JSONObject();
+            arquivoJson.putAll(mapa);
+
+            json.putAll(mapa);
+            setRua(arquivoJson.get("logradouro").toString());
+            setCep(arquivoJson.get("cep").toString());
+            setEstado(arquivoJson.get("uf").toString());
+            setCidade(arquivoJson.get("localidade").toString());
+            setBairro(arquivoJson.get("bairro").toString());
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return json;
+    }
+
+    public static JSONObject buscarCepRua(String uf, String rua, String cidade) {
+        JSONObject json = new JSONObject();
+
+        try {
+            //URL url = new URL("http://viacep.com.br/ws/" + cep + "/json");
+            //https://viacep.com.br/ws/MG/CONTAGEM/dezenove/json/
+            URL url = new URL("http://viacep.com.br/ws/" + uf + "/" + cidade + "/" + rua + "/json");
+            URLConnection urlConnection = url.openConnection();
+            InputStream is = urlConnection.getInputStream();
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+
+            StringBuilder jsonSb = new StringBuilder();
+
+            String inputLine;
+
+            while ((inputLine = br.readLine()) != null) {
+                jsonSb.append(inputLine);
+            }
+            br.close();
+            //*************************************
+            String jsonStringParaMapa = jsonSb.toString();//String completa do json
+
+//        //System.out.println(programadorLista.toJSONString());
+            try (FileWriter arqJson = new FileWriter("programadores2.json")) {
+
+                arqJson.write(jsonStringParaMapa);
+                arqJson.flush();
+
+            } catch (Exception e) {
+            }
+
+            Map<String, String> mapa = new HashMap<>();
+
+            Matcher matcher = Pattern.compile("\"\\D.*?\": \".*?\"").matcher(jsonStringParaMapa);
+            while (matcher.find()) {
+                String[] group = matcher.group().split(":");
+                mapa.put(group[0].replaceAll("\"", "").trim(), group[1].replaceAll("\"", "").trim());
+            }
+
+            //System.out.println(mapa);
+            JSONObject arquivoJson = new JSONObject();
+            arquivoJson.putAll(mapa);
+
+            json.putAll(mapa);
+            setRua(arquivoJson.get("logradouro").toString());
+            setCep(arquivoJson.get("cep").toString());
+            setEstado(arquivoJson.get("uf").toString());
+            setCidade(arquivoJson.get("localidade").toString());
+            setBairro(arquivoJson.get("bairro").toString());
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return json;
+    }
+
+    @Override
+    public String toString() {
+        String string = rua + " - " + bairro + " - " + cidade + " - " + estado + " - " + cep;
+        return string;
+    }
 
     /**
      * @return the rua
@@ -97,79 +229,6 @@ public class ClienteViaCepWS {
      */
     public static void setCep(String aCep) {
         cep = aCep;
-    }
-
-    public ClienteViaCepWS() {
-
-    }
-
-    public static void main(String[] args) throws IOException {
-        String json = buscarCep("30530600").toString();
-        System.out.println(" JSONN " + json);
-
-        Map<String, String> mapa = new HashMap<>();
-
-        Matcher matcher = Pattern.compile("\"\\D.*?\": \".*?\"").matcher(json);
-        while (matcher.find()) {
-            String[] group = matcher.group().split(":");
-            mapa.put(group[0].replaceAll("\"", "").trim(), group[1].replaceAll("\"", "").trim());
-        }
-
-        //System.out.println(mapa);
-        JSONObject arquivoJson = new JSONObject();
-        arquivoJson.putAll(mapa);
-
-    }
-
-    public static JSONObject buscarCep(String cep) {
-        JSONObject json = new JSONObject();
-
-        try {
-            URL url = new URL("http://viacep.com.br/ws/" + cep + "/json");
-            URLConnection urlConnection = url.openConnection();
-            InputStream is = urlConnection.getInputStream();
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-
-            StringBuilder jsonSb = new StringBuilder();
-
-            String inputLine;
-
-            while ((inputLine = br.readLine()) != null) {
-                jsonSb.append(inputLine);
-            }
-            br.close();
-            //*************************************
-            String jsonStringParaMapa = jsonSb.toString();
-            Map<String, String> mapa = new HashMap<>();
-
-            Matcher matcher = Pattern.compile("\"\\D.*?\": \".*?\"").matcher(jsonStringParaMapa);
-            while (matcher.find()) {
-                String[] group = matcher.group().split(":");
-                mapa.put(group[0].replaceAll("\"", "").trim(), group[1].replaceAll("\"", "").trim());
-            }
-
-            //System.out.println(mapa);
-            JSONObject arquivoJson = new JSONObject();
-            arquivoJson.putAll(mapa);
-
-            json.putAll(mapa);
-            setRua(arquivoJson.get("logradouro").toString());
-            setCep(arquivoJson.get("cep").toString());
-            setEstado(arquivoJson.get("uf").toString());
-            setCidade(arquivoJson.get("localidade").toString());
-            setBairro(arquivoJson.get("bairro").toString());
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        return json;
-    }
-
-    @Override
-    public String toString() {
-        String string = rua + " - " + bairro + " - " + cidade + " - " + estado + " - " + cep;
-        return string;
     }
 
 }
