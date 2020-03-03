@@ -131,8 +131,9 @@ public class ViewVendasFinal extends javax.swing.JFrame {
         rootPane.getRootPane().getActionMap().put("F6", new AbstractAction("F6") {
             @Override
             public void actionPerformed(ActionEvent e) {
-                 salvarEImprimir("teste");
-                System.out.println("aaaaaaaaaaa");
+                salvarEImprimir("teste");
+                System.out.println("Acionou botão salvar e imprimir");
+
             }
         });
 
@@ -140,8 +141,8 @@ public class ViewVendasFinal extends javax.swing.JFrame {
         rootPane.getRootPane().getActionMap().put("F5", new AbstractAction("F5") {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
-                System.out.println("bbbbbbbbb");
+                System.out.println("Acionou botão salvar apenas");
+
             }
         });
     }
@@ -857,10 +858,10 @@ public class ViewVendasFinal extends javax.swing.JFrame {
         jPanel17.setLayout(jPanel17Layout);
         jPanel17Layout.setHorizontalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jtfNumCasa, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
             .addGroup(jPanel17Layout.createSequentialGroup()
-                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 99, Short.MAX_VALUE))
-            .addComponent(jtfNumCasa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel17Layout.setVerticalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -887,10 +888,8 @@ public class ViewVendasFinal extends javax.swing.JFrame {
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addComponent(jLabel2)
-                .addContainerGap(109, Short.MAX_VALUE))
-            .addComponent(jtfNomeDoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jtfNomeDoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -915,10 +914,8 @@ public class ViewVendasFinal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addContainerGap(109, Short.MAX_VALUE))
-                    .addComponent(jtfEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jtfEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -965,10 +962,8 @@ public class ViewVendasFinal extends javax.swing.JFrame {
         jPanel18.setLayout(jPanel18Layout);
         jPanel18Layout.setHorizontalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel18Layout.createSequentialGroup()
-                .addComponent(jLabel17)
-                .addGap(0, 96, Short.MAX_VALUE))
-            .addComponent(jtfBairro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jtfBairro, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+            .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -990,10 +985,8 @@ public class ViewVendasFinal extends javax.swing.JFrame {
         jPanel19.setLayout(jPanel19Layout);
         jPanel19Layout.setHorizontalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel19Layout.createSequentialGroup()
-                .addComponent(jLabel19)
-                .addContainerGap(106, Short.MAX_VALUE))
-            .addComponent(jtfCidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jtfCidade, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+            .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1016,10 +1009,9 @@ public class ViewVendasFinal extends javax.swing.JFrame {
         jPanel20Layout.setHorizontalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel20Layout.createSequentialGroup()
-                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel18)
-                    .addComponent(jtfEstado, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE))
+                .addComponent(jtfEstado, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
                 .addGap(1, 1, 1))
+            .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel20Layout.setVerticalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1046,8 +1038,8 @@ public class ViewVendasFinal extends javax.swing.JFrame {
         jPanel21.setLayout(jPanel21Layout);
         jPanel21Layout.setHorizontalGroup(
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1)
             .addComponent(jtfCodigoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel21Layout.setVerticalGroup(
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1929,10 +1921,8 @@ public class ViewVendasFinal extends javax.swing.JFrame {
         limparFormulario();
     }//GEN-LAST:event_btCancelarPedidoMouseReleased
 
-    
-    private void salvar(){
-    
-       
+    private void salvar() {
+
         listaModelProdutos = new ArrayList<>();//reseta o listaModelProdutos para não receber lixos de outras vendas
         modelVendasProdutos = new ModelProdutosDaVenda();//Cria um novo ModelVendas para não ficar nehum lixo das vendas anteriores
         listaModelVendasProdutos = new ArrayList<>();//reseta o listaModelVendasProdutos para não receber lixos de outras vendas
@@ -2224,11 +2214,9 @@ public class ViewVendasFinal extends javax.swing.JFrame {
 
         viewVisualizarVendas.visualizarVenda(modelVenda.getIdVenda());
 
-
-    
     }
     private void btSalvarPedidoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btSalvarPedidoMouseReleased
-salvar();
+        salvar();
     }//GEN-LAST:event_btSalvarPedidoMouseReleased
 
     private void uJPanelImagem11MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_uJPanelImagem11MouseReleased
@@ -2527,7 +2515,6 @@ salvar();
 //        } catch (IOException ex) {
 //            ex.printStackTrace();
 //        }
-
         /**
          * Desktop desktop = Desktop.getDesktop();
          *

@@ -18,6 +18,8 @@ import org.json.simple.parser.JSONParser;
  */
 public class ViewBuscarCepCorreios extends javax.swing.JFrame {
 
+    ClienteViaCepWS clienteViaCep = new ClienteViaCepWS();
+
     /**
      * Creates new form ViewBuscarCepCorreios
      */
@@ -64,7 +66,21 @@ public class ViewBuscarCepCorreios extends javax.swing.JFrame {
 //        } catch (Exception e) {
 //        }
 //**************************************************************************
+
+        //https://viacep.com.br/ws/30530600/json/
+        //https://viacep.com.br/ws/MG/CONTAGEM/dezenove/json/
         JSONParser jsonParser = new JSONParser();
+
+        JSONArray programadorLista = new JSONArray();
+        programadorLista.add(clienteViaCep.buscarCep("32183560"));
+
+        try (FileWriter arqJson = new FileWriter("programadores.json")) {
+
+            arqJson.write(programadorLista.toJSONString());
+            arqJson.flush();
+
+        } catch (Exception e) {
+        }
 
         try (FileReader arqJsonReader = new FileReader("programadores.json")) {
 
@@ -73,7 +89,7 @@ public class ViewBuscarCepCorreios extends javax.swing.JFrame {
 
             for (Iterator it = programadoresArray.iterator(); it.hasNext();) {
                 Object object = it.next();
-                parserProgramador((JSONObject) object);
+                lerObjetosJsonCep((JSONObject) object);
 
             }
 
@@ -84,20 +100,27 @@ public class ViewBuscarCepCorreios extends javax.swing.JFrame {
 
     }
 
-    private static void parserProgramador(JSONObject pProgramador) {
+    private void lerObjetosJsonCep(JSONObject pObjetoJson) {
 
-        System.out.println(pProgramador.get("Nome"));
-        System.out.println(pProgramador.get("CPF"));
-        System.out.println(pProgramador.get("Signo"));
-        System.out.println(Integer.parseInt(pProgramador.get("idade").toString()));
-        System.out.println("Linguagens: ");
+        System.out.println(pObjetoJson.get("cep"));
+        System.out.println(pObjetoJson.get("logradouro"));
+        System.out.println(pObjetoJson.get("bairro"));
+        System.out.println(pObjetoJson.get("localidade"));
+        System.out.println(pObjetoJson.get("uf"));
 
-        JSONArray lingArray = (JSONArray) pProgramador.get("Linguagens");
+        jtfCep.setText(pObjetoJson.get("cep").toString());
+        jtfBairro.setText(pObjetoJson.get("bairro").toString());
+        jtfRua.setText(pObjetoJson.get("logradouro").toString());
+        jtfEstado.setText(pObjetoJson.get("uf").toString());
+        jtfCidade.setText(pObjetoJson.get("localidade").toString());
         
-        
-        for (Object linguagemArray : lingArray) {
-            System.out.print(linguagemArray.toString()+" ");
-        }
+       
+
+//        JSONArray lingArray = (JSONArray) pObjetoJson.get("cep");
+//
+//        for (Object linguagemArray : lingArray) {
+//            System.out.print(linguagemArray.toString() + " ");
+//        }
         System.out.println("\n-----------------");
 
     }
@@ -150,6 +173,11 @@ public class ViewBuscarCepCorreios extends javax.swing.JFrame {
         jtfCep.setPreferredSize(new java.awt.Dimension(100, 20));
 
         jButton1.setText("Pesquisar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Limpar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -190,29 +218,29 @@ public class ViewBuscarCepCorreios extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfRua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfRua, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfCep, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(249, Short.MAX_VALUE))
+                .addGap(249, 249, 249))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -242,6 +270,12 @@ public class ViewBuscarCepCorreios extends javax.swing.JFrame {
         jtfEstado.setText("");
         jtfCep.setText("");
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        lerObjetosJsonCep(clienteViaCep.buscarCep(jtfCep.getText()));
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
