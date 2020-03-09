@@ -103,11 +103,7 @@ public class ViewBuscarCepCorreios extends javax.swing.JFrame {
 
     private void lerObjetosJsonCep(JSONObject pObjetoJson) {
 
-        System.out.println(pObjetoJson.get("cep"));
-        System.out.println(pObjetoJson.get("logradouro"));
-        System.out.println(pObjetoJson.get("bairro"));
-        System.out.println(pObjetoJson.get("localidade"));
-        System.out.println(pObjetoJson.get("uf"));
+        
 
         jtfCep.setText(pObjetoJson.get("cep").toString());
         jtfBairro.setText(pObjetoJson.get("bairro").toString());
