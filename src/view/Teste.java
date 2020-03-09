@@ -43,4 +43,24 @@ public class Teste {
 
     
 
+    
+    public void popularjpanel(List<Endereco> listaEnd, JPanel painel,JFrame jframe){
+        
+        MeuTableModel meuTableModel = new MeuTableModel(listaEnd);
+        
+        JTable jTable = new JTable(meuTableModel);
+        painel.removeAll();
+        
+        painel.setSize(500, 500);
+        painel.setLayout(new GridLayout(1, 1));
+        painel.add(new JScrollPane(jTable));
+        painel.setVisible(true);
+        painel.validate();
+        
+        
+        
+    
+    }
+    
+
 }
