@@ -176,42 +176,27 @@ public class ClienteViaCepWS {
                 Object obj = jsonParser.parse(jsonStringParaMapa);
                 JSONArray programadoresArray = (JSONArray) obj;
 
-                ArrayList testeLista = new ArrayList<Endereco>();
+                listaDeEnderecos = new ArrayList<Endereco>();
 
-                testeLista = programadoresArray;
-
-                for (int i = 0; i < testeLista.size(); i++) {
+                for (int i = 0; i < programadoresArray.size(); i++) {
                     Object objteste;
-                    Endereco cliente = new Endereco();
+                    Endereco enderecoCadastro = new Endereco();
 
-                    objteste = jsonParser.parse(testeLista.get(i).toString());
+                    objteste = jsonParser.parse(programadoresArray.get(i).toString());
 
                     JSONObject endereco = (JSONObject) objteste;
 
-                    cliente.setBairro(endereco.get("bairro").toString());
-                    
-                    cliente.setRua(endereco.get("logradouro").toString());
+                    enderecoCadastro.setBairro(endereco.get("bairro").toString());
+                    enderecoCadastro.setRua(endereco.get("logradouro").toString());
+                    enderecoCadastro.setCidade(endereco.get("localidade").toString());
+                    enderecoCadastro.setEstado(endereco.get("uf").toString());
 
-                    System.out.println(cliente);
-                    
-                    listaDeEnderecos.add(cliente);
-                    
-                    
-                    
+                    listaDeEnderecos.add(enderecoCadastro);
 
                     System.out.println(listaDeEnderecos.size());
 
                 }
-                
-                System.out.println(listaDeEnderecos.get(1).getBairro());
 
-                for (Iterator it = programadoresArray.iterator(); it.hasNext();) {
-                    Object object = it.next();
-
-                }
-
-                //programadoresArray.forEach(programador -> parserProgramador((JSONObject)programador));
-                //arqJsonReader.read();
             } catch (Exception e) {
             }
 
@@ -228,42 +213,10 @@ public class ClienteViaCepWS {
         return json;
     }
 
-    public JTable popularJpanel(JPanel painelFundo) {
-        
-        
-                
-              
-
-        
-        JTable tabela;
-        JScrollPane barraRolagem;
-        
-
-        Object[][] dados = {
-            
-        
-            {"Ana Monteiro", "48 9923-7898", "ana.monteiro@gmail.com"},
-            {"João da Silva", "48 8890-3345", "joaosilva@hotmail.com"},
-            {"Pedro Cascaes", "48 9870-5634", "pedrinho@gmail.com"}
-        };
-        
-
-        String[] colunas = {"Nome", "Telefone", "Email"};
-
-        painelFundo.setLayout(new GridLayout(1, 1));
-        tabela = new JTable(dados, colunas);
-        barraRolagem = new JScrollPane(tabela);
-        painelFundo.add(barraRolagem);
-        painelFundo.validate();
-
-        return tabela;
-    }
-
     @Override
     public String toString() {
 
-        String string = rua + " - " + bairro + " - " + cidade + " - " + estado + " - " + cep;
-        return string;
+        return rua + " - " + bairro + " - " + cidade + " - " + estado + " - " + cep;
     }
 
     /**

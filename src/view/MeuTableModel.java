@@ -5,7 +5,12 @@
  */
 package view;
 
+import java.awt.GridLayout;
 import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -16,7 +21,9 @@ public class MeuTableModel extends AbstractTableModel {
 
     private final String[] mNomesColunas = {
         "Rua", //indice 0 do vetor
-        "Bairro" //indice 1 do vetor
+        "Bairro", //indice 1 do vetor
+        "Cidade", //indice 1 do vetor
+        "UF" //indice 1 do vetor
     };
 
     private final List<Endereco> mLista;
@@ -48,6 +55,10 @@ public class MeuTableModel extends AbstractTableModel {
                 return mLista.get(linha).getRua();
             case 1:
                 return mLista.get(linha).getBairro();
+            case 2:
+                return mLista.get(linha).getCidade();
+            case 3:
+                return mLista.get(linha).getEstado();
             default:
                 return 0;
         }
@@ -67,7 +78,11 @@ public class MeuTableModel extends AbstractTableModel {
             case 0:
                 return String.class;
             case 1:
-                return Integer.class;
+                return String.class;
+            case 2:
+                return String.class;
+            case 3:
+                return String.class;
             default:
                 return null;
         }
@@ -79,8 +94,24 @@ public class MeuTableModel extends AbstractTableModel {
         
         enderecoDaLinha.setBairro(mLista.get(linha).getBairro());
         enderecoDaLinha.setRua(mLista.get(linha).getRua());
+        enderecoDaLinha.setCidade(mLista.get(linha).getCidade());
+        enderecoDaLinha.setEstado(mLista.get(linha).getEstado());
         
         return enderecoDaLinha;
+    }
+    
+    public void popularjpanel(JPanel painel, JFrame jframe) {
+
+        MeuTableModel meuTableModel = new MeuTableModel(mLista);
+
+        JTable jTable = new JTable(meuTableModel);
+        painel.removeAll();
+
+        painel.setLayout(new GridLayout(1, 1));
+        painel.add(new JScrollPane(jTable));
+        painel.setVisible(true);
+        painel.validate();
+
     }
     
 

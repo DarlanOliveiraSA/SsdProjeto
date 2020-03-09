@@ -294,11 +294,11 @@ public class ViewBuscarCepCorreios extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        lerObjetosJsonCep(clienteViaCep.buscarCep(jtfCep.getText()));
-        lerObjetosJsonCep(clienteViaCep.buscarCepRua("mg", "rua", "contagem"));
+        //lerObjetosJsonCep(clienteViaCep.buscarCep(jtfCep.getText()));
+        lerObjetosJsonCep(clienteViaCep.buscarCepRua(jtfEstado.getText(), jtfRua.getText(), jtfCidade.getText()));
         
-        Teste darlan = new Teste();
-        darlan.popularjpanel(clienteViaCep.getListaDeEnderecos(), jpOutrosEnd, this);
+        MeuTableModel listarEnderecos = new MeuTableModel(clienteViaCep.getListaDeEnderecos());
+        listarEnderecos.popularjpanel(jpOutrosEnd, this);
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
